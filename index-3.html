@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<meta name="description" content="AS SHOP - متجر إلكترونيات وإكسسوارات تقنية">
+<title>AS SHOP | متجر الإلكترونيات</title>
+<style>
+:root{--gold:#d4af37;--gold2:#f4d77b;--bg:#070707;--card:#111;--text:#fff;--muted:#aaa;--line:#252525;--green:#25d366}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Tahoma,sans-serif;background:linear-gradient(180deg,#050505,#101010);color:var(--text);line-height:1.7}
+a{text-decoration:none;color:inherit}
+.container{width:min(1100px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(5,5,5,.92);backdrop-filter:blur(12px);border-bottom:1px solid #222}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:900;letter-spacing:2px;color:var(--gold)}
+.nav a{margin-right:18px;color:#ddd;font-size:14px}
+.cart-btn{background:var(--gold);color:#080808;border:0;border-radius:999px;padding:10px 15px;font-weight:800;cursor:pointer}
+.hero{padding:75px 0 55px;text-align:center;background:radial-gradient(circle at 50% 0%,rgba(212,175,55,.16),transparent 45%)}
+.badge{display:inline-block;border:1px solid #4d4020;color:var(--gold2);padding:6px 13px;border-radius:999px;font-size:13px;margin-bottom:18px}
+.hero h1{font-size:clamp(38px,9vw,72px);line-height:1.05;margin-bottom:15px}
+.hero h1 span{color:var(--gold)}
+.hero p{color:var(--muted);max-width:650px;margin:0 auto 25px}
+.cta{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#080808;padding:13px 24px;border-radius:10px;font-weight:900}
+section{padding:55px 0}
+.section-title{text-align:center;margin-bottom:30px}
+.section-title h2{font-size:30px}
+.section-title p{color:var(--muted);font-size:14px}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.product{background:linear-gradient(145deg,#151515,#0c0c0c);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 35px #0006}
+.product-img{height:230px;background:#191919;display:flex;align-items:center;justify-content:center;position:relative}
+.product-img img{width:100%;height:100%;object-fit:cover;display:none}
+.placeholder{font-size:70px}
+.product-body{padding:18px}
+.product h3{font-size:21px}
+.product p{color:var(--muted);font-size:13px;min-height:48px;margin:7px 0}
+.price{color:var(--gold2);font-size:23px;font-weight:900;margin:12px 0}
+.add{width:100%;padding:12px;border:1px solid var(--gold);background:transparent;color:var(--gold2);border-radius:9px;font-weight:800;cursor:pointer}
+.add:hover{background:var(--gold);color:#000}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.feature{background:#111;border:1px solid #222;border-radius:15px;padding:20px;text-align:center}
+.feature b{display:block;margin:8px 0;color:#fff}.feature span{font-size:13px;color:var(--muted)}
+.order{background:linear-gradient(135deg,#161208,#0b0b0b);border:1px solid #3b3219;border-radius:20px;padding:28px}
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+input,select,textarea{width:100%;background:#0b0b0b;border:1px solid #2b2b2b;color:#fff;border-radius:9px;padding:13px;margin-bottom:12px;font-size:15px}
+textarea{min-height:90px;resize:vertical}
+label{display:block;font-size:13px;color:#bbb;margin-bottom:5px}
+.whatsapp{width:100%;background:var(--green);color:#062d14;border:0;padding:14px;border-radius:10px;font-weight:900;font-size:16px;cursor:pointer}
+.cart{position:fixed;inset:0;background:#0009;z-index:50;display:none}
+.cart.open{display:block}
+.cart-panel{position:absolute;right:0;top:0;height:100%;width:min(430px,92%);background:#0d0d0d;border-left:1px solid #333;padding:22px;overflow:auto}
+.cart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.close{background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
+.cart-item{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #222;padding:13px 0}
+.cart-item small{color:#aaa}
+.remove{background:none;border:0;color:#e66;cursor:pointer}
+.total{font-size:21px;font-weight:900;color:var(--gold2);margin:20px 0}
+.empty{color:#888;text-align:center;padding:35px 0}
+footer{border-top:1px solid #222;padding:28px 0;text-align:center;color:#888;font-size:13px}
+.gold{color:var(--gold)}
+@media(max-width:750px){
+ .nav a{display:none}.products,.features,.order-grid{grid-template-columns:1fr}
+ .hero{padding-top:55px}.product-img{height:250px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#">AS SHOP</a>
+    <div>
+      <a href="#products">المنتجات</a>
+      <a href="#why">لماذا نحن؟</a>
+      <button class="cart-btn" onclick="openCart()">🛒 السلة (<span id="cartCount">0</span>)</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container">
+    <div class="badge">PREMIUM TECH STORE</div>
+    <h1>تقنية أفضل.<br><span>اختيار أذكى.</span></h1>
+    <p>مرحبًا بك في AS SHOP — منتجات إلكترونية وإكسسوارات تقنية مختارة بعناية، بأسعار مناسبة وطلب سريع عبر واتساب.</p>
+    <a class="cta" href="#products">اكتشف المنتجات</a>
+  </div>
+</section>
+
+<section id="products">
+  <div class="container">
+    <div class="section-title">
+      <h2>منتجاتنا</h2>
+      <p>اختر منتجك وأضفه إلى السلة ثم أرسل الطلب عبر واتساب.</p>
+    </div>
+    <div class="products">
+
+      <article class="product">
+        <div class="product-img">
+          <!-- ضع رابط صورة الباور بانك مكان src -->
+          <img id="img1" src="" alt="Power Bank">
+          <div class="placeholder" id="ph1">🔋</div>
+        </div>
+        <div class="product-body">
+          <h3>Power Bank</h3>
+          <p>باور بانك عملي لشحن أجهزتك أثناء التنقل.</p>
+          <div class="price">1800 دج</div>
+          <button class="add" onclick="addToCart('Power Bank',1800)">أضف إلى السلة</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-img">
+          <!-- ضع رابط صورة السماعة مكان src -->
+          <img id="img2" src="" alt="سماعة لاسلكية">
+          <div class="placeholder" id="ph2">🎧</div>
+        </div>
+        <div class="product-body">
+          <h3>سماعة لاسلكية</h3>
+          <p>تصميم عصري وتجربة صوت مناسبة للاستخدام اليومي.</p>
+          <div class="price">1100 دج</div>
+          <button class="add" onclick="addToCart('سماعة لاسلكية',1100)">أضف إلى السلة</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-img">
+          <!-- ضع رابط صورة الساعة مكان src -->
+          <img id="img3" src="" alt="ساعة ذكية">
+          <div class="placeholder" id="ph3">⌚</div>
+        </div>
+        <div class="product-body">
+          <h3>ساعة ذكية</h3>
+          <p>إكسسوار ذكي وأنيق لمتابعة يومك بأسلوب عصري.</p>
+          <div class="price">1500 دج</div>
+          <button class="add" onclick="addToCart('ساعة ذكية',1500)">أضف إلى السلة</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="section-title"><h2>لماذا AS SHOP؟</h2><p>تجربة شراء بسيطة ومباشرة.</p></div>
+    <div class="features">
+      <div class="feature"><div style="font-size:30px">💎</div><b>منتجات مختارة</b><span>نهتم بالشكل والفائدة والقيمة.</span></div>
+      <div class="feature"><div style="font-size:30px">📲</div><b>طلب سريع</b><span>أرسل طلبك مباشرة عبر واتساب.</span></div>
+      <div class="feature"><div style="font-size:30px">🇩🇿</div><b>أسعار بالدينار</b><span>الأسعار واضحة بالدينار الجزائري.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="checkout">
+<div class="container">
+  <div class="section-title"><h2>إتمام الطلب</h2><p>املأ معلوماتك ثم أرسل الطلب.</p></div>
+  <div class="order">
+    <div class="order-grid">
+      <div>
+        <label>الاسم الكامل</label>
+        <input id="name" placeholder="اكتب اسمك">
+        <label>رقم الهاتف</label>
+        <input id="phone" inputmode="tel" placeholder="07xxxxxxxx">
+        <label>الولاية</label>
+        <input id="wilaya" placeholder="مثال: باتنة">
+      </div>
+      <div>
+        <label>العنوان</label>
+        <textarea id="address" placeholder="اكتب عنوان التوصيل بالتفصيل"></textarea>
+        <label>ملاحظة</label>
+        <textarea id="note" placeholder="ملاحظة اختيارية"></textarea>
+      </div>
+    </div>
+    <button class="whatsapp" onclick="sendOrder()">📲 إرسال الطلب عبر واتساب</button>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div>© 2026 <span class="gold">AS SHOP</span> — جميع الحقوق محفوظة</div>
+  <div style="margin-top:5px">للطلب والاستفسار: <span class="gold">0771596744</span></div>
+</footer>
+
+<div class="cart" id="cart">
+  <div class="cart-panel">
+    <div class="cart-head">
+      <h2>سلة المشتريات</h2>
+      <button class="close" onclick="closeCart()">×</button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="total">الإجمالي: <span id="total">0</span> دج</div>
+    <button class="whatsapp" onclick="goCheckout()">متابعة لإتمام الطلب</button>
+  </div>
+</div>
+
+<script>
+const WHATSAPP="213771596744";
+let cart=[];
+
+function addToCart(name,price){
+  const found=cart.find(x=>x.name===name);
+  if(found) found.qty++;
+  else cart.push({name,price,qty:1});
+  renderCart();
+  openCart();
+}
+function removeFromCart(i){cart.splice(i,1);renderCart()}
+function renderCart(){
+  document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
+  const box=document.getElementById("cartItems");
+  if(!cart.length){box.innerHTML='<div class="empty">السلة فارغة</div>';document.getElementById("total").textContent="0";return}
+  let total=0;
+  box.innerHTML=cart.map((x,i)=>{
+    total+=x.price*x.qty;
+    return `<div class="cart-item"><div><b>${x.name}</b><br><small>${x.price} دج × ${x.qty}</small></div><button class="remove" onclick="removeFromCart(${i})">حذف</button></div>`;
+  }).join("");
+  document.getElementById("total").textContent=total;
+}
+function openCart(){document.getElementById("cart").classList.add("open")}
+function closeCart(){document.getElementById("cart").classList.remove("open")}
+function goCheckout(){
+  closeCart();
+  document.getElementById("checkout").scrollIntoView({behavior:"smooth"});
+}
+function sendOrder(){
+  if(!cart.length){alert("أضف منتجًا واحدًا على الأقل إلى السلة.");return}
+  const name=document.getElementById("name").value.trim();
+  const phone=document.getElementById("phone").value.trim();
+  const wilaya=document.getElementById("wilaya").value.trim();
+  const address=document.getElementById("address").value.trim();
+  const note=document.getElementById("note").value.trim();
+  if(!name||!phone||!wilaya||!address){alert("يرجى ملء الاسم والهاتف والولاية والعنوان.");return}
+  let total=0;
+  const items=cart.map(x=>{total+=x.price*x.qty;return `- ${x.name} × ${x.qty} = ${x.price*x.qty} دج`}).join("\n");
+  const msg=`🛍️ *طلب جديد من AS SHOP*\n\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📍 الولاية: ${wilaya}\n🏠 العنوان: ${address}\n\n📦 المنتجات:\n${items}\n\n💰 الإجمالي: ${total} دج\n📝 ملاحظة: ${note||"لا توجد"}`;
+  window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg),"_blank");
+}
+renderCart();
+</script>
+</body>
+</html>
